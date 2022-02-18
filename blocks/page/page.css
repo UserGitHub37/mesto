@@ -1,14 +1,22 @@
-/* html > * * {
+html > * * {
   outline: 1px dashed red;
-} */
+}
 
 .page {
-  background-color: #000000;
+  background-color: #000;
 }
 
 .page__container {
   max-width: 1280px;
   margin: 45px auto 60px;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-weight: 900;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
 }
 
 .header {
@@ -29,5 +37,75 @@
 }
 
 .page__header {
-  margin: 0 auto 40px;
+  margin: 0 auto;
+}
+
+.content {
+  max-width: 880px;
+}
+
+.page__content {
+  margin: 40px auto 66px;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 132px 294px 24px auto;
+  min-height: 120px;
+  column-gap: 18px;
+  width: 100%;
+}
+
+.profile__avatar {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile__text-wrapper {
+
+}
+
+.profile__name {
+  margin: 22px 0 0;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+  /* or 114% */
+  color: #FFF;
+}
+
+.profile__info {
+  margin: 8px 0 0;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFF;
+}
+
+.profile__edit-button {
+  background-color: transparent;
+  background-image: url(../../images/profile-edit-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #FFFFFF;
+  margin-top: 37px;
+  padding: 0;
+}
+
+.profile__add-button {
+  align-self: center;
+  justify-self: end;
+  background-color: transparent;
+  background-image: url(../../images/profile-add-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #FFFFFF;
+  border-radius: 2px;
 }
