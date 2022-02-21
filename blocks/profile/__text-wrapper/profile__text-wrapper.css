@@ -1,0 +1,13 @@
+.profile__text-wrapper {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__text-wrapper {
+    grid-column: 2/3;
+    grid-row: 2/3;
+    text-align: center;
+    min-width: 189px;
+  }
+}

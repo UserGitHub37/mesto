@@ -24,8 +24,8 @@
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__info">Исследователь океана</p>
         </div>
-        <button type="button" class="profile__edit-button"></button>
-        <button type="button" class="profile__add-button"></button>
+        <button type="button" aria-label="Редактировать профиль" class="profile__edit-button"></button>
+        <button type="button" aria-label="Добавить изображение" class="profile__add-button"></button>
       </section>
 
       <section class="elements content__elements">
@@ -34,7 +34,7 @@
             <img src="./images/elements-Karachaevo.jpg" alt="Карачаевск" class="elements__image">
             <div class="elements__title-wrapper">
               <h2 class="elements__title">Карачаевск</h2>
-              <button type="button" class="elements__heart"></button>
+              <button type="button" aria-label='Отметка "Нравится"' class="elements__heart"></button>
             </div>
           </li>
 
@@ -42,7 +42,7 @@
             <img src="./images/elements-Elbrus.jpg" alt="Гора Эльбрус" class="elements__image">
             <div class="elements__title-wrapper">
               <h2 class="elements__title">Гора Эльбрус</h2>
-              <button type="button" class="elements__heart"></button>
+              <button type="button" aria-label='Отметка "Нравится"' class="elements__heart"></button>
             </div>
           </li>
 
@@ -50,7 +50,7 @@
             <img src="./images/elements-Dombai.jpg" alt="Домбай" class="elements__image">
             <div class="elements__title-wrapper">
               <h2 class="elements__title">Домбай</h2>
-              <button type="button" class="elements__heart"></button>
+              <button type="button" aria-label='Отметка "Нравится"' class="elements__heart"></button>
             </div>
           </li>
 
@@ -58,7 +58,7 @@
             <img src="./images/elements-Elbrus.jpg" alt="Гора Эльбрус" class="elements__image">
             <div class="elements__title-wrapper">
               <h2 class="elements__title">Гора Эльбрус</h2>
-              <button type="button" class="elements__heart"></button>
+              <button type="button" aria-label='Отметка "Нравится"' class="elements__heart"></button>
             </div>
           </li>
 
@@ -66,7 +66,7 @@
             <img src="./images/elements-Dombai.jpg" alt="Домбай" class="elements__image">
             <div class="elements__title-wrapper">
               <h2 class="elements__title">Домбай</h2>
-              <button type="button" class="elements__heart"></button>
+              <button type="button" aria-label='Отметка "Нравится"' class="elements__heart"></button>
             </div>
           </li>
 
@@ -74,7 +74,7 @@
             <img src="./images/elements-Karachaevo.jpg" alt="Карачаево" class="elements__image">
             <div class="elements__title-wrapper">
               <h2 class="elements__title">Карачаево-Черкессия</h2>
-              <button type="button" class="elements__heart"></button>
+              <button type="button" aria-label='Отметка "Нравится"' class="elements__heart"></button>
             </div>
           </li>
         </ul>
@@ -88,11 +88,11 @@
 
     <section class="popup">
       <div class="popup__container">
-        <button type="button" class="popup__close-button"></button>
-        <form class="popup__form" action="" name="popupForm">
+        <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+        <form class="popup__form" action="#" name="popupForm">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__input popup__input_field_name" type="text" name="userName" id="" placeholder="Имя" required>
-          <input class="popup__input popup__input_field_about" type="text" name="aboutUser" id="" placeholder="О себе">
+          <input class="popup__input popup__input_field_name" type="text" name="userName" placeholder="Имя" required>
+          <input class="popup__input popup__input_field_about" type="text" name="aboutUser" placeholder="О себе">
           <button type="submit" class="popup__submit-button">Сохранить</button>
         </form>
 
