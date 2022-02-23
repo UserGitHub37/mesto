@@ -11,6 +11,5 @@
     grid-template-columns: 1fr auto 1fr;
     column-gap: 10px;
     justify-content: center;
-    width: 100%;
   }
 }

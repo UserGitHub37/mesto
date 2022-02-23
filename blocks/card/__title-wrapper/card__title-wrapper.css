@@ -1,0 +1,13 @@
+.card__title-wrapper {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-items: center;
+  margin: 22px 20px 24px 21px;
+}
+
+@media screen and (max-width: 767px) {
+  .card__title-wrapper {
+    margin-bottom: 25px;
+  }
+}

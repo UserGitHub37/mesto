@@ -1,4 +1,4 @@
-.elements__heart {
+.card__heart {
   background-color: transparent;
   background-image: url(../../../images/elements-heart.svg);
   background-repeat: no-repeat;
@@ -11,6 +11,6 @@
   transition: opacity 0.2s ease;
 }
 
-.elements__heart:hover {
-  opacity: 0.6;
+.card__heart:hover {
+  opacity: 0.5;
 }
