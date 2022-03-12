@@ -30,7 +30,7 @@
 
       <section class="elements content__elements">
         <ul class="elements__wrapper">
-          <li class="card">
+<!--      <li class="card">
             <img src="./images/elements-Karachaevo.jpg" alt="Карачаевск" class="card__image">
             <div class="card__title-wrapper">
               <h2 class="card__title">Карачаевск</h2>
@@ -76,7 +76,7 @@
               <h2 class="card__title">Карачаево-Черкессия</h2>
               <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
             </div>
-          </li>
+          </li> -->
         </ul>
       </section>
 
@@ -86,7 +86,7 @@
       <p class="footer__author">&copy;&nbsp;2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_profile">
       <div class="popup__container">
         <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -95,9 +95,38 @@
           <input class="popup__input popup__input_field_about" type="text" name="aboutUser" placeholder="О себе">
           <button type="submit" class="popup__submit-button">Сохранить</button>
         </form>
-
       </div>
     </div>
+
+    <div class="popup popup_place">
+      <div class="popup__container">
+        <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" action="#" name="popupForm">
+          <input class="popup__input popup__input_field_name" type="text" name="userName" placeholder="Имя" required>
+          <input class="popup__input popup__input_field_about" type="text" name="aboutUser" placeholder="О себе">
+          <button type="submit" class="popup__submit-button">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_image">
+      <div class="popup__container">
+        <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+        <h2 class="popup__title">Название изображения</h2>
+      </div>
+    </div>
+
+    <template class="card-template">
+      <li class="card">
+        <img src="./images/elements-Karachaevo.jpg" alt="Карачаевск" class="card__image">
+        <button type="button" aria-label="Удалить карточку" class="card__remove-button"></button>
+        <div class="card__title-wrapper">
+          <h2 class="card__title">Карачаевск</h2>
+          <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
+        </div>
+      </li>
+    </template>
 
   </div>
   <script src="./scripts/script.js"></script>
