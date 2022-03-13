@@ -99,8 +99,17 @@ placeFormElement.addEventListener('submit', formSubmitHandlerPlace);
 const imagePopup = document.querySelector('.popup_image');
 const imagePopupBtnClose = imagePopup.querySelector('.popup__close-button');
 
+function openPopupImage (evt) {
+  const enlargedImage = imagePopup.querySelector('.popup__enlarged-image');
+  imagePopup.classList.add('popup_opened');
+  enlargedImage.src = evt.target.src;
+}
 
+function closePopupImage () {
+  imagePopup.classList.remove('popup_opened');
+}
 
+imagePopupBtnClose.addEventListener('click', closePopupImage);
 
 
 function toggleLike (evt) {
@@ -117,16 +126,18 @@ function createCard (data) {
     .querySelector('.card-template')
     .content.firstElementChild.cloneNode(true);
 
-  const cardHeart = cardElement.querySelector('.card__heart');
+  const cardTitle = cardElement.querySelector('.card__title');
+  const cardImage = cardElement.querySelector('.card__image');
   const cardRemoveButton = cardElement.querySelector('.card__remove-button');
+  const cardHeart = cardElement.querySelector('.card__heart');
 
-  cardElement.querySelector('.card__title').textContent = data.name;
-  cardElement.querySelector('.card__image').src = data.link;
-  cardElement.querySelector('.card__image').alt = data.name;
+  cardTitle.textContent = data.name;
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
 
-  cardHeart.addEventListener('click', toggleLike);
+  cardImage.addEventListener('click', openPopupImage);
   cardRemoveButton.addEventListener('click', removeCard);
-// навесить обработчик событий на открытие картинки
+  cardHeart.addEventListener('click', toggleLike);
 
   return cardElement;
 }
