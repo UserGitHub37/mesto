@@ -101,8 +101,10 @@ const imagePopupBtnClose = imagePopup.querySelector('.popup__close-button');
 
 function openPopupImage (evt) {
   const enlargedImage = imagePopup.querySelector('.popup__enlarged-image');
+  const imagePopupTitle = imagePopup.querySelector('.popup__title_type_image');
   imagePopup.classList.add('popup_opened');
   enlargedImage.src = evt.target.src;
+  imagePopupTitle.textContent = evt.target.parentElement.querySelector('.card__title').textContent;
 }
 
 function closePopupImage () {
