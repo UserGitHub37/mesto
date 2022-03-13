@@ -28,55 +28,9 @@
         <button type="button" aria-label="Добавить изображение" class="profile__add-button"></button>
       </section>
 
-      <section class="elements content__elements">
+      <section class="elements content__elements" aria-label="Фотографии различных мест">
         <ul class="elements__wrapper">
-<!--      <li class="card">
-            <img src="./images/elements-Karachaevo.jpg" alt="Карачаевск" class="card__image">
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Карачаевск</h2>
-              <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
-            </div>
-          </li>
 
-          <li class="card">
-            <img src="./images/elements-Elbrus.jpg" alt="Гора Эльбрус" class="card__image">
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
-            </div>
-          </li>
-
-          <li class="card">
-            <img src="./images/elements-Dombai.jpg" alt="Домбай" class="card__image">
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
-            </div>
-          </li>
-
-          <li class="card">
-            <img src="./images/elements-Elbrus.jpg" alt="Гора Эльбрус" class="card__image">
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
-            </div>
-          </li>
-
-          <li class="card">
-            <img src="./images/elements-Dombai.jpg" alt="Домбай" class="card__image">
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Домбай</h2>
-              <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
-            </div>
-          </li>
-
-          <li class="card">
-            <img src="./images/elements-Karachaevo.jpg" alt="Карачаево" class="card__image">
-            <div class="card__title-wrapper">
-              <h2 class="card__title">Карачаево-Черкессия</h2>
-              <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
-            </div>
-          </li> -->
         </ul>
       </section>
 
@@ -91,8 +45,8 @@
         <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" action="#" name="popupForm">
-          <input class="popup__input popup__input_field_name" type="text" name="userName" placeholder="Имя" required>
-          <input class="popup__input popup__input_field_about" type="text" name="aboutUser" placeholder="О себе">
+          <input class="popup__input popup__input_field_name-profile" type="text" name="userName" placeholder="Имя" required>
+          <input class="popup__input popup__input_field_about-profile" type="text" name="aboutUser" placeholder="О себе">
           <button type="submit" class="popup__submit-button">Сохранить</button>
         </form>
       </div>
@@ -103,8 +57,8 @@
         <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" action="#" name="popupForm">
-          <input class="popup__input popup__input_field_name" type="text" name="userName" placeholder="Имя" required>
-          <input class="popup__input popup__input_field_about" type="text" name="aboutUser" placeholder="О себе">
+          <input class="popup__input popup__input_field_name-place" type="text" name="placeName" placeholder="Название" required>
+          <input class="popup__input popup__input_field_link-place" type="text" name="placeImageLink" placeholder="Ссылка на картинку" required>
           <button type="submit" class="popup__submit-button">Создать</button>
         </form>
       </div>
@@ -119,10 +73,10 @@
 
     <template class="card-template">
       <li class="card">
-        <img src="./images/elements-Karachaevo.jpg" alt="Карачаевск" class="card__image">
+        <img src="" alt="" class="card__image">
         <button type="button" aria-label="Удалить карточку" class="card__remove-button"></button>
         <div class="card__title-wrapper">
-          <h2 class="card__title">Карачаевск</h2>
+          <h2 class="card__title"></h2>
           <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
         </div>
       </li>
