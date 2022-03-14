@@ -144,6 +144,7 @@ function submitHandlerPlaceForm (evt) {
 
 initialCards.forEach(cardData => { renderCard(cardData, cardsContainer); });
 
+
 profileEditButton.addEventListener('click', openPopupProfile);
 profilePopupBtnClose.addEventListener('click', closePopup);
 profileFormElement.addEventListener('submit', submitHandlerProfileForm);
