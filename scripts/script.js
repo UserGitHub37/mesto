@@ -34,22 +34,22 @@ const profileInfo = profile.querySelector('.profile__info');
 const profileEditButton = profile.querySelector('.profile__edit-button');
 
 const profilePopup = document.querySelector('.popup_profile');
-const profilePopupBtnClose = profilePopup.querySelector('.popup__close-button');
 const profileFormElement = profilePopup.querySelector('.popup__form');
 const profileNameInput = profileFormElement.querySelector('.popup__input_field_name-profile');
 const profileAboutInput = profileFormElement.querySelector('.popup__input_field_about-profile');
 
-
 const placeAddButton = profile.querySelector('.profile__add-button');
 const placePopup = document.querySelector('.popup_place');
-const placePopupBtnClose = placePopup.querySelector('.popup__close-button');
 
 const placeFormElement = placePopup.querySelector('.popup__form');
 const placeNameInput = placeFormElement.querySelector('.popup__input_field_name-place');
 const placeImageLinkInput = placeFormElement.querySelector('.popup__input_field_link-place');
 
 const imagePopup = document.querySelector('.popup_image');
-const imagePopupBtnClose = imagePopup.querySelector('.popup__close-button');
+const enlargedImage = imagePopup.querySelector('.popup__enlarged-image');
+const imagePopupTitle = imagePopup.querySelector('.popup__title_type_image');
+
+const popups = document.querySelectorAll('.popup');
 
 
 function openPopup (popup) {
@@ -72,11 +72,12 @@ function openPopupPlace () {
 
 
 function openPopupImage (evt) {
-  const enlargedImage = imagePopup.querySelector('.popup__enlarged-image');
-  const imagePopupTitle = imagePopup.querySelector('.popup__title_type_image');
   openPopup(imagePopup);
+  const imageDescription = evt.target.parentElement
+    .querySelector('.card__title').textContent;
   enlargedImage.src = evt.target.src;
-  imagePopupTitle.textContent = evt.target.parentElement.querySelector('.card__title').textContent;
+  enlargedImage.alt = imageDescription;
+  imagePopupTitle.textContent = imageDescription;
 }
 
 
@@ -145,12 +146,17 @@ function submitHandlerPlaceForm (evt) {
 initialCards.forEach(cardData => { renderCard(cardData, cardsContainer); });
 
 
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(evt);
+    }
+  });
+});
+
+
 profileEditButton.addEventListener('click', openPopupProfile);
-profilePopupBtnClose.addEventListener('click', closePopup);
 profileFormElement.addEventListener('submit', submitHandlerProfileForm);
 
 placeAddButton.addEventListener('click', openPopupPlace);
-placePopupBtnClose.addEventListener('click', closePopup);
 placeFormElement.addEventListener('submit', submitHandlerPlaceForm);
-
-imagePopupBtnClose.addEventListener('click', closePopup);
