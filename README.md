@@ -13,4 +13,6 @@
 
 * [Ссылка на 2-ю часть макета в Figma](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
 
+* [Ссылка на 3-ю часть макета в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
+
 * [Ссылка на проект, опубликованный на GitHub Pages](https://usergithub37.github.io/mesto/index.html)
