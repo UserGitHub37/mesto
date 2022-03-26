@@ -73,12 +73,3 @@ enableValidation({
   messageErrorClass: 'popup__error-message_visible'
 });
 
-
-/*
-  formSelector: '.popup__form',                   // селектор формы
-  inputSelector: '.popup__input',                 // селектор инпутов внутри этой формы
-  submitButtonSelector: '.popup__submit-button',         // селектор кнопки сабмита этой формы
-  inactiveButtonClass: 'popup__submit-button_disabled',  // класс модификатор для дизэйбла кнопки
-  inputErrorClass: 'popup__input_type_error', //класс модификатор для инпутовю. Красное подчеркивание?!
-  errorClass: 'popup__error-message_visible'              // селектор контейнеров для ошибок этой формы
- */
