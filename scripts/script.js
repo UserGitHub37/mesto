@@ -49,11 +49,10 @@ const imagePopup = document.querySelector('.popup_image');
 const enlargedImage = imagePopup.querySelector('.popup__enlarged-image');
 const imagePopupTitle = imagePopup.querySelector('.popup__title_type_image');
 
-const popups = document.querySelectorAll('.popup');
+const popups = Array.from(document.querySelectorAll('.popup'));
 
 
 function handleEscUp (evt) {
-  /* evt.preventDefault(); */
   const activePopup = document.querySelector('.popup_opened');
   if (evt.key === "Escape") {
     closePopup(activePopup);
