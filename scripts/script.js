@@ -144,12 +144,15 @@ function submitHandlerProfileForm (evt) {
 
 function submitHandlerPlaceForm (evt) {
   evt.preventDefault();
+  const submitButton = evt.target.querySelector('.popup__submit-button');
   const newCardData = {
     name: placeNameInput.value,
     link: placeImageLinkInput.value
   };
   renderCard(newCardData, cardsContainer);
   closePopup(evt.target.closest('.popup'));
+  submitButton.classList.add('popup__submit-button_disabled');
+  submitButton.setAttribute('disabled', 'true');
 }
 
 
