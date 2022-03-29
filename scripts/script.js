@@ -66,7 +66,26 @@ function handleEscUp (evt) {
 }
 
 
+function disableButton (buttonElement, inactiveButtonClass) {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute('disabled', 'true');
+}
+
+
+function resetInputError (popup) {
+  const formElement = popup.querySelector('.popup__form');
+  const inputList = Array.from(popup.querySelectorAll('.popup__input'));
+  const errorClasses = {inputErrorClass: 'popup__input_type_error', messageErrorClass: 'popup__error-message_visible'};
+
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, errorClasses);
+  });
+}
+
+
 function openPopup (popup) {
+  const buttonElement = popup.querySelector('.popup__submit-button');
+  disableButton(buttonElement, 'popup__submit-button_disabled');
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscUp);
 }
@@ -76,6 +95,7 @@ function openPopupProfile () {
   openPopup(profilePopup);
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileInfo.textContent;
+  resetInputError(profilePopup);
 }
 
 
@@ -83,6 +103,7 @@ function openPopupPlace () {
   placeNameInput.value = null;
   placeImageLinkInput.value = null;
   openPopup(placePopup);
+  resetInputError(placePopup);
 }
 
 
@@ -144,13 +165,10 @@ function submitHandlerProfileForm (evt) {
 
 function submitHandlerPlaceForm (evt) {
   evt.preventDefault();
-  const submitButton = evt.target.querySelector('.popup__submit-button');
   const newCardData = {
     name: placeNameInput.value,
     link: placeImageLinkInput.value
   };
-  submitButton.classList.add('popup__submit-button_disabled');
-  submitButton.setAttribute('disabled', 'true');
   renderCard(newCardData, cardsContainer);
   closePopup(evt.target.closest('.popup'));
 }

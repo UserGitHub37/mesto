@@ -33,8 +33,7 @@ function hasInvalidInput(inputList) {
 
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled', 'disabled');
+    disableButton(buttonElement, inactiveButtonClass);
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.removeAttribute('disabled');
@@ -45,7 +44,6 @@ function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
 function setEventListeners(formElement, {inputSelector, submitButtonSelector, inactiveButtonClass, ...rest}) {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement, rest);
