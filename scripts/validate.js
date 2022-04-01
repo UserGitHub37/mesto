@@ -1,4 +1,3 @@
-
 function hideInputError(formElement, inputElement, {inputErrorClass, messageErrorClass}) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
@@ -28,6 +27,12 @@ function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
+}
+
+
+function disableButton (buttonElement, inactiveButtonClass) {
+  buttonElement.classList.add(inactiveButtonClass);
+  buttonElement.setAttribute('disabled', 'true');
 }
 
 
