@@ -1,22 +1,23 @@
 .popup__error-message {
-  display: inline-block;
+  display: block;
   visibility: hidden;
   color: #FF0000;
   font-weight: normal;
   font-size: 12px;
-  line-height: 14.52px;
-  min-height: 21px;
-  vertical-align: top;
+  line-height: 1.25;
+  min-height: 30px;
+  margin-top: 1px;
 }
 
 
 .popup__error-message:last-of-type {
-  min-height: 44px;
+  min-height: 43px;
+  margin-top: 5px;
 }
 
 
 @media screen and (max-width: 767px) {
   .popup__error-message:last-of-type {
-    min-height: 41px;
+    min-height: 40px;
   }
 }
