@@ -74,7 +74,7 @@ function openPopup (popup) {
 
 
 function openPopupProfile () {
-  disableButton(profileSubmitButton, 'popup__submit-button_disabled');
+  formValidators.popupFormProfile.disableButton();
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileInfo.textContent;
   openPopup(profilePopup);
@@ -82,14 +82,16 @@ function openPopupProfile () {
 
 
 function openPopupPlace () {
-  disableButton(placeSubmitButton, 'popup__submit-button_disabled');
+  formValidators.popupFormPlace.disableButton(placeSubmitButton, 'popup__submit-button_disabled');
   placeNameInput.value = null;
   placeImageLinkInput.value = null;
   openPopup(placePopup);
 }
 
 
-function renderCard (cardElement, cardsContainer) {
+function renderCard (cardData, cardsContainer) {
+  const card = new Card(cardData, '.card-template');
+  const cardElement = card.createCard();
   cardsContainer.prepend(cardElement);
 }
 
@@ -164,9 +166,7 @@ class Card {
 
 
 initialCards.forEach(cardData => {
-  const card = new Card(cardData, '.card-template');
-  const cardElement = card.createCard();
-  renderCard(cardElement, cardsContainer);
+  renderCard(cardData, cardsContainer);
 });
 
 
