@@ -8,6 +8,7 @@ export class FormValidator {
     this._messageErrorClass = validationSettings.messageErrorClass;
     this._formElement = formElement;
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
 
 
@@ -59,23 +60,16 @@ export class FormValidator {
   }
 
 
-
-  _setEventListeners() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+  enableValidation() {
+    this._formElement.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    });
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleButtonState();
       });
     });
-  }
-
-
-  enableValidation() {
-    this._formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-    this._setEventListeners();
   }
 
 }

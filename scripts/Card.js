@@ -9,10 +9,9 @@ export class Card {
 
 
   _openPopupImage () {
-    const imageDescription = this._cardTitle.textContent;
     enlargedImage.src = this._cardImage.src;
-    enlargedImage.alt = imageDescription;
-    imagePopupTitle.textContent = imageDescription;
+    enlargedImage.alt = this._cardTitle.textContent;
+    imagePopupTitle.textContent = this._cardTitle.textContent;
     openPopup(imagePopup);
   }
 
