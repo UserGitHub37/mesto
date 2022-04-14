@@ -1,3 +1,8 @@
+import { FormValidator } from './FormValidator.js';
+import { Card } from './Card.js';
+import { openPopup, closePopup } from './utils.js';
+
+
 const initialCards = [
   {
     name: 'Архыз',
@@ -25,7 +30,6 @@ const initialCards = [
   }
 ];
 
-
 const cardsContainer = document.querySelector('.elements__wrapper');
 
 const profile = document.querySelector('.profile');
@@ -46,31 +50,19 @@ const placeNameInput = placeFormElement.querySelector('.popup__input_field_name-
 const placeImageLinkInput = placeFormElement.querySelector('.popup__input_field_link-place');
 const placeSubmitButton = placeFormElement.querySelector('.popup__submit-button');
 
-const imagePopup = document.querySelector('.popup_image');
-const enlargedImage = imagePopup.querySelector('.popup__enlarged-image');
-const imagePopupTitle = imagePopup.querySelector('.popup__title_type_image');
-
 const popups = Array.from(document.querySelectorAll('.popup'));
 
+const validationSettings = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  messageErrorClass: 'popup__error-message_visible'
+};
 
-function closePopup (popup) {
-  document.removeEventListener('keydown', handleEscUp);
-  popup.classList.remove('popup_opened');
-}
-
-
-function handleEscUp (evt) {
-  if (evt.key === "Escape") {
-    const activePopup = document.querySelector('.popup_opened');
-    closePopup(activePopup);
-  }
-}
-
-
-function openPopup (popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscUp);
-}
+const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
+const formValidators = {};
 
 
 function openPopupProfile () {
@@ -86,13 +78,6 @@ function openPopupPlace () {
   placeNameInput.value = null;
   placeImageLinkInput.value = null;
   openPopup(placePopup);
-}
-
-
-function renderCard (cardData, cardsContainer) {
-  const card = new Card(cardData, '.card-template');
-  const cardElement = card.createCard();
-  cardsContainer.prepend(cardElement);
 }
 
 
@@ -115,53 +100,10 @@ function submitHandlerPlaceForm (evt) {
 }
 
 
-class Card {
-  constructor(cardData, templateSelector) {
-    this._cardData = cardData;
-    this._templateSelector = templateSelector;
-  }
-
-
-  _openPopupImage () {
-    const imageDescription = this._cardTitle.textContent;
-    enlargedImage.src = this._cardImage.src;
-    enlargedImage.alt = imageDescription;
-    imagePopupTitle.textContent = imageDescription;
-    openPopup(imagePopup);
-  }
-
-
-  _toggleLike () {
-    this._cardHeart.classList.toggle('card__heart_active');
-  }
-
-
-  _removeCard () {
-    this._cardElement.remove();
-  }
-
-
-  createCard () {
-    this._cardElement = document
-      .querySelector(this._templateSelector)
-      .content.firstElementChild.cloneNode(true);
-
-    const cardRemoveButton = this._cardElement.querySelector('.card__remove-button');
-    this._cardTitle = this._cardElement.querySelector('.card__title');
-    this._cardImage = this._cardElement.querySelector('.card__image');
-    this._cardHeart = this._cardElement.querySelector('.card__heart');
-
-    this._cardTitle.textContent = this._cardData.name;
-    this._cardImage.src = this._cardData.link;
-    this._cardImage.alt = this._cardData.name;
-
-    cardRemoveButton.addEventListener('click', () => this._removeCard());
-    this._cardImage.addEventListener('click', () => this._openPopupImage());
-    this._cardHeart.addEventListener('click', () => this._toggleLike());
-
-    return this._cardElement;
-  }
-
+function renderCard (cardData, cardsContainer) {
+  const card = new Card(cardData, '.card-template');
+  const cardElement = card.createCard();
+  cardsContainer.prepend(cardElement);
 }
 
 
@@ -184,3 +126,10 @@ profileFormElement.addEventListener('submit', submitHandlerProfileForm);
 
 placeAddButton.addEventListener('click', openPopupPlace);
 placeFormElement.addEventListener('submit', submitHandlerPlaceForm);
+
+
+formList.forEach((formElement) => {
+  const formValidator = new FormValidator(validationSettings, formElement);
+  formValidators[formElement.name] = formValidator;
+  formValidator.enableValidation();
+});
