@@ -9,9 +9,9 @@ export class Card {
 
 
   _openPopupImage () {
-    enlargedImage.src = this._cardImage.src;
-    enlargedImage.alt = this._cardTitle.textContent;
-    imagePopupTitle.textContent = this._cardTitle.textContent;
+    enlargedImage.src = this._cardData.link;
+    enlargedImage.alt = this._cardData.name;
+    imagePopupTitle.textContent = this._cardData.name;
     openPopup(imagePopup);
   }
 
@@ -23,6 +23,7 @@ export class Card {
 
   _removeCard () {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
 
