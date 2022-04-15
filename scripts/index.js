@@ -41,12 +41,14 @@ function openPopupProfile () {
   formValidators.popupFormProfile.disableButton();
   profileNameInput.value = profileName.textContent;
   profileAboutInput.value = profileInfo.textContent;
+  formValidators.popupFormProfile.resetErrors();
   openPopup(profilePopup);
 }
 
 
 function openPopupPlace () {
   placeFormElement.reset();
+  formValidators.popupFormPlace.resetErrors();
   openPopup(placePopup);
 }
 
