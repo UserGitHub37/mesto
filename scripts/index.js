@@ -47,6 +47,7 @@ function openPopupProfile () {
 
 
 function openPopupPlace () {
+  formValidators.popupFormPlace.disableButton();
   placeFormElement.reset();
   formValidators.popupFormPlace.resetErrors();
   openPopup(placePopup);
@@ -93,7 +94,13 @@ initialCards.forEach(cardData => {
 
 popups.forEach((popup) => {
   popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup__close-button') || evt.target.classList.contains('popup')) {
+    if (evt.target.classList.contains('popup__close-button')) {
+      closePopup(popup);
+    }
+  });
+
+  popup.addEventListener('mousedown', (evt) => {
+    if (evt.target.classList.contains('popup')) {
       closePopup(popup);
     }
   });
