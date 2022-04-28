@@ -1,6 +1,6 @@
 import { FormValidator } from './FormValidator.js';
-import { Card } from './Card.js';
-import { openPopup, closePopup } from './utils.js';
+import Card from './Card.js';
+import { openPopup, closePopup, imagePopup, enlargedImage, imagePopupTitle } from './utils.js';
 import { initialCards } from './initialCards.js';
 import Section from './Section.js';
 
@@ -38,12 +38,27 @@ const formValidators = {};
 
 const cardsList = new Section ({
   items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, '.card-template');
-    const cardElement = card.createCard();
-    cardsList.addItem(cardElement);
-  }
+  renderer
 }, '.elements__wrapper');
+
+
+function renderer (item) {
+  const card = new Card({
+    cardData: item,
+    handleCardClick
+  }, '.card-template');
+  const cardElement = card.createCard();
+  cardsList.addItem(cardElement);
+}
+
+
+function handleCardClick (name, link) {
+  enlargedImage.src = link;
+  enlargedImage.alt = name;
+  imagePopupTitle.textContent = name;
+  openPopup(imagePopup);
+}
+
 
 cardsList.renderInitialItems();
 
