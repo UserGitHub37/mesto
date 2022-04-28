@@ -2,9 +2,8 @@ import { FormValidator } from './FormValidator.js';
 import { Card } from './Card.js';
 import { openPopup, closePopup } from './utils.js';
 import { initialCards } from './initialCards.js';
+import Section from './Section.js';
 
-
-const cardsContainer = document.querySelector('.elements__wrapper');
 
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
@@ -37,6 +36,18 @@ const formList = Array.from(document.querySelectorAll(validationSettings.formSel
 const formValidators = {};
 
 
+const cardsList = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '.card-template');
+    const cardElement = card.createCard();
+    cardsList.addItem(cardElement);
+  }
+}, '.elements__wrapper');
+
+cardsList.renderInitialItems();
+
+
 function openPopupProfile () {
   formValidators.popupFormProfile.disableButton();
   profileNameInput.value = profileName.textContent;
@@ -62,34 +73,17 @@ function submitHandlerProfileForm (evt) {
 }
 
 
-function renderCard (cardData) {
-  const card = new Card(cardData, '.card-template');
-  return card.createCard();
-}
-
-
-function insertCard (cardElement) {
-  cardsContainer.prepend(cardElement);
-}
-
-
 function submitHandlerPlaceForm (evt) {
   evt.preventDefault();
   const newCardData = {
     name: placeNameInput.value,
     link: placeImageLinkInput.value
   };
-  const cardElement = renderCard(newCardData);
-  insertCard (cardElement);
+
+  cardsList.rendererItem(newCardData);
   closePopup(evt.target.closest('.popup'));
   formValidators.popupFormPlace.disableButton();
 }
-
-
-initialCards.forEach(cardData => {
-  const cardElement = renderCard(cardData);
-  insertCard (cardElement);
-});
 
 
 popups.forEach((popup) => {
