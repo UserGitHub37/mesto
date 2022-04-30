@@ -1,17 +1,16 @@
-import FormValidator from './FormValidator.js';
-import Card from './Card.js';
-import { initialCards } from './initialCards.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
-import { validationSettings } from './validationSettings.js';
-import { profileEditButton, placeAddButton, profileNameInput, profileAboutInput } from './constants.js';
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import { initialCards } from '../utils/initialCards.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import { validationSettings } from '../utils/validationSettings.js';
+import { profileEditButton, placeAddButton, profileNameInput, profileAboutInput } from '../utils/constants.js';
 
 
 const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
 const formValidators = {};
-
 
 
 const popupWithProfileForm = new PopupWithForm('.popup_profile', submitHandlerProfileForm);
@@ -81,6 +80,7 @@ function submitHandlerPlaceForm (evt, {placeName: name, placeImageLink: link}) {
   popupWithPlaceForm.close();
   formValidators.popupFormPlace.disableButton();
 }
+
 
 cardsList.renderInitialItems();
 
