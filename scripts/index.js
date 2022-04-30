@@ -1,13 +1,13 @@
-import { FormValidator } from './FormValidator.js';
+import FormValidator from './FormValidator.js';
 import Card from './Card.js';
-import { openPopup, closePopup, imagePopup, enlargedImage, imagePopupTitle } from './utils.js';
 import { initialCards } from './initialCards.js';
 import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 
 const profile = document.querySelector('.profile');
-const profileName = profile.querySelector('.profile__name');
-const profileInfo = profile.querySelector('.profile__info');
 const profileEditButton = profile.querySelector('.profile__edit-button');
 
 const profilePopup = document.querySelector('.popup_profile');
@@ -16,12 +16,7 @@ const profileNameInput = profileFormElement.querySelector('.popup__input_field_n
 const profileAboutInput = profileFormElement.querySelector('.popup__input_field_about-profile');
 
 const placeAddButton = profile.querySelector('.profile__add-button');
-const placePopup = document.querySelector('.popup_place');
-const placeFormElement = placePopup.querySelector('.popup__form');
-const placeNameInput = placeFormElement.querySelector('.popup__input_field_name-place');
-const placeImageLinkInput = placeFormElement.querySelector('.popup__input_field_link-place');
 
-const popups = Array.from(document.querySelectorAll('.popup'));
 
 const validationSettings = {
   formSelector: '.popup__form',
@@ -36,7 +31,23 @@ const formList = Array.from(document.querySelectorAll(validationSettings.formSel
 const formValidators = {};
 
 
-const cardsList = new Section ({
+const popupWithProfileForm = new PopupWithForm('.popup_profile', submitHandlerProfileForm);
+popupWithProfileForm.setEventListeners();
+
+const popupWithPlaceForm = new PopupWithForm('.popup_place', submitHandlerPlaceForm);
+popupWithPlaceForm.setEventListeners();
+
+const popupWithImage = new PopupWithImage('.popup_image');
+popupWithImage.setEventListeners();
+
+
+const userInfo = new UserInfo({
+  nameSelector: '.profile__name',
+  infoSelector: '.profile__info'
+});
+
+
+const cardsList = new Section({
   items: initialCards,
   renderer
 }, '.elements__wrapper');
@@ -53,74 +64,46 @@ function renderer (item) {
 
 
 function handleCardClick (name, link) {
-  enlargedImage.src = link;
-  enlargedImage.alt = name;
-  imagePopupTitle.textContent = name;
-  openPopup(imagePopup);
+  popupWithImage.open(name, link);
 }
-
-
-cardsList.renderInitialItems();
 
 
 function openPopupProfile () {
   formValidators.popupFormProfile.disableButton();
-  profileNameInput.value = profileName.textContent;
-  profileAboutInput.value = profileInfo.textContent;
+  const infoData = userInfo.getUserInfo();
+  profileNameInput.value = infoData.name;
+  profileAboutInput.value = infoData.info;
   formValidators.popupFormProfile.resetErrors();
-  openPopup(profilePopup);
+  popupWithProfileForm.open();
 }
 
 
 function openPopupPlace () {
   formValidators.popupFormPlace.disableButton();
-  placeFormElement.reset();
   formValidators.popupFormPlace.resetErrors();
-  openPopup(placePopup);
+  popupWithPlaceForm.open();
 }
 
 
-function submitHandlerProfileForm (evt) {
+function submitHandlerProfileForm (evt, {userName: name, aboutUser: info}) {
   evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileInfo.textContent = profileAboutInput.value;
-  closePopup(evt.target.closest('.popup'));
+  userInfo.setUserInfo({ name, info });
+  popupWithProfileForm.close();
 }
 
 
-function submitHandlerPlaceForm (evt) {
+function submitHandlerPlaceForm (evt, {placeName: name, placeImageLink: link}) {
   evt.preventDefault();
-  const newCardData = {
-    name: placeNameInput.value,
-    link: placeImageLinkInput.value
-  };
-
-  cardsList.rendererItem(newCardData);
-  closePopup(evt.target.closest('.popup'));
+  cardsList.rendererItem({name, link});
+  popupWithPlaceForm.close();
   formValidators.popupFormPlace.disableButton();
 }
 
-
-popups.forEach((popup) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup__close-button')) {
-      closePopup(popup);
-    }
-  });
-
-  popup.addEventListener('mousedown', (evt) => {
-    if (evt.target.classList.contains('popup')) {
-      closePopup(popup);
-    }
-  });
-});
-
+cardsList.renderInitialItems();
 
 profileEditButton.addEventListener('click', openPopupProfile);
-profileFormElement.addEventListener('submit', submitHandlerProfileForm);
 
 placeAddButton.addEventListener('click', openPopupPlace);
-placeFormElement.addEventListener('submit', submitHandlerPlaceForm);
 
 
 formList.forEach((formElement) => {
