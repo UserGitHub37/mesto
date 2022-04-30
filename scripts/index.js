@@ -5,30 +5,13 @@ import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
 import UserInfo from './UserInfo.js';
+import { validationSettings } from './validationSettings.js';
+import { profileEditButton, placeAddButton, profileNameInput, profileAboutInput } from './constants.js';
 
-
-const profile = document.querySelector('.profile');
-const profileEditButton = profile.querySelector('.profile__edit-button');
-
-const profilePopup = document.querySelector('.popup_profile');
-const profileFormElement = profilePopup.querySelector('.popup__form');
-const profileNameInput = profileFormElement.querySelector('.popup__input_field_name-profile');
-const profileAboutInput = profileFormElement.querySelector('.popup__input_field_about-profile');
-
-const placeAddButton = profile.querySelector('.profile__add-button');
-
-
-const validationSettings = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__submit-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  messageErrorClass: 'popup__error-message_visible'
-};
 
 const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
 const formValidators = {};
+
 
 
 const popupWithProfileForm = new PopupWithForm('.popup_profile', submitHandlerProfileForm);
