@@ -10,13 +10,13 @@ export default class Section {
   }
 
   rendererItem(item) {
-    this._renderer(item);
+    return this._renderer(item);
   }
 
   renderInitialItems() {
-    this._initialItems.forEach(item => {
-      this._renderer(item);
-    });
+    const cards = [];
+    this._initialItems.forEach(item => cards.push(this._renderer(item)));
+    return cards;
   }
 
 }

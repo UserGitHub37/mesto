@@ -41,8 +41,7 @@ function renderer (item) {
     cardData: item,
     handleCardClick
   }, '.card-template');
-  const cardElement = card.createCard();
-  cardsList.addItem(cardElement);
+  return card;
 }
 
 
@@ -77,13 +76,17 @@ function submitHandlerProfileForm (evt, {userName: name, aboutUser: info}) {
 
 function submitHandlerPlaceForm (evt, {placeName: name, placeImageLink: link}) {
   evt.preventDefault();
-  cardsList.rendererItem({name, link});
+  const card = cardsList.rendererItem({name, link});
+  cardsList.addItem(card.createCard());
   popupWithPlaceForm.close();
   formValidators.popupFormPlace.disableButton();
 }
 
 
-cardsList.renderInitialItems();
+cardsList.renderInitialItems().forEach(card => {
+  cardsList.addItem(card.createCard());
+});
+
 
 profileEditButton.addEventListener('click', openPopupProfile);
 
