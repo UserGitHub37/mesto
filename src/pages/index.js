@@ -8,6 +8,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import { validationSettings } from '../utils/validationSettings.js';
 import { profileEditButton, placeAddButton, profileNameInput, profileAboutInput } from '../utils/constants.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 
 
 const formList = Array.from(document.querySelectorAll(validationSettings.formSelector));
@@ -22,6 +23,9 @@ popupWithPlaceForm.setEventListeners();
 
 const popupWithImage = new PopupWithImage('.popup_image');
 popupWithImage.setEventListeners();
+
+const PopupWithDeleteCard = new PopupWithConfirmation('.popup_confirmation', submitHandlerDeleteCard);
+PopupWithDeleteCard.setEventListeners();
 
 
 const userInfo = new UserInfo({
@@ -66,6 +70,12 @@ function openPopupPlace () {
   popupWithPlaceForm.open();
 }
 
+function openPopupDeleteCard () {
+  PopupWithDeleteCard.open();
+}
+
+openPopupDeleteCard();
+
 
 function submitHandlerProfileForm (evt, {userName: name, aboutUser: info}) {
   evt.preventDefault();
@@ -80,6 +90,12 @@ function submitHandlerPlaceForm (evt, {placeName: name, placeImageLink: link}) {
   cardsList.addItem(card.createCard());
   popupWithPlaceForm.close();
   formValidators.popupFormPlace.disableButton();
+}
+
+
+function submitHandlerDeleteCard (evt) {
+  evt.preventDefault();
+  console.log("Меня удалили");
 }
 
 
