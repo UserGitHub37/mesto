@@ -3,7 +3,7 @@
   grid-template-columns: auto auto;
   justify-content: space-between;
   align-items: center;
-  margin: 26px 20px 24px 21px;
+  margin: 23px 20px 18px 21px;
 }
 
 @media screen and (max-width: 767px) {
