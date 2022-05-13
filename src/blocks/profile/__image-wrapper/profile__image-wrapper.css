@@ -1,0 +1,6 @@
+.profile__image-wrapper {
+  position: relative;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}

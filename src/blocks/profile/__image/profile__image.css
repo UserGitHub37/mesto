@@ -1,10 +1,11 @@
 .profile__image {
-  max-width: 120px;
-  max-height: 120px;
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
 }
+
 
 @media screen and (max-width: 767px) {
   .profile__image {

@@ -18,7 +18,10 @@
     <main class="content page__content">
 
       <section class="profile">
-        <img src="<%=require('./images/profile-image-Cousteau.jpg')%>" alt="Картинка пользователя" class="profile__image">
+        <div class="profile__image-wrapper">
+            <img src="<%=require('./images/profile-image-Cousteau.jpg')%>" alt="Картинка пользователя" class="profile__image">
+            <button type="button" aria-label="Редактировать фото профиля" class="profile__avatar-edit-button"></button>
+        </div>
         <div class="profile__text-wrapper">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__info">Исследователь океана</p>
