@@ -1,4 +1,4 @@
-.profile__avatar-edit-button {
+.profile__image-edit-button {
   position: absolute;
   background-color: rgba(0, 0, 0, .8);
   background-image: url(../../../images/edit.svg);
@@ -16,6 +16,6 @@
   cursor: pointer;
 }
 
-.profile__avatar-edit-button:hover {
+.profile__image-edit-button:hover {
   opacity: 1;
 }

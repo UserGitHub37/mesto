@@ -19,12 +19,12 @@
 
       <section class="profile">
         <div class="profile__image-wrapper">
-            <img src="<%=require('./images/profile-image-Cousteau.jpg')%>" alt="Картинка пользователя" class="profile__image">
-            <button type="button" aria-label="Редактировать фото профиля" class="profile__avatar-edit-button"></button>
+            <img src="#" alt="Картинка пользователя" class="profile__image">
+            <button type="button" aria-label="Редактировать фото профиля" class="profile__image-edit-button"></button>
         </div>
         <div class="profile__text-wrapper">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <p class="profile__info">Исследователь океана</p>
+          <h1 class="profile__name"></h1>
+          <p class="profile__info"></p>
         </div>
         <button type="button" aria-label="Редактировать профиль" class="profile__edit-button"></button>
         <button type="button" aria-label="Добавить изображение" class="profile__add-button"></button>
@@ -51,6 +51,18 @@
           <span class="popup__error-message name-profile-input-error"></span>
           <input class="popup__input popup__input_field_about-profile" id="about-profile-input" type="text" name="aboutUser" placeholder="О себе" minlength="2" maxlength="200" required>
           <span class="popup__error-message about-profile-input-error"></span>
+          <button type="submit" class="popup__submit-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_image-profile">
+      <div class="popup__container">
+        <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" action="#" name="popupFormProfileImage" novalidate>
+          <input class="popup__input popup__input_field_image-profile" id="link-profile-input" type="url" name="profileImageLink" placeholder="Ссылка на фото профиля" required>
+          <span class="popup__error-message link-profile-input-error"></span>
           <button type="submit" class="popup__submit-button">Сохранить</button>
         </form>
       </div>
@@ -96,7 +108,7 @@
           <h2 class="card__title"></h2>
           <div class="card__like-wrapper">
             <button type="button" aria-label='Отметка "Нравится"' class="card__heart"></button>
-            <div class="card__like-counter">6</div>
+            <div class="card__like-counter">7</div>
           </div>
         </div>
       </li>
