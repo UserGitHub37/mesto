@@ -44,71 +44,70 @@ popupWithImage.setEventListeners();
 const PopupWithDeleteCard = new PopupWithConfirmation('.popup_confirmation', submitHandlerDeleteCard);
 PopupWithDeleteCard.setEventListeners();
 
-
-api.getUserInfo()
-  .then(data => {
-    profileImage.src = data.avatar;
-    userInfo.setUserInfo({
-      name: data.name,
-      about: data.about
-    });
-  })
-  .catch(err => console.log(err));
-
-
-  api.getInitialCards()
-    .then((initialCards) => {
-      return new Section({
-        items: initialCards,
-        renderer
-      }, '.elements__wrapper');
-    })
-    .then(cardsListSection => {
-      const popupWithPlaceForm = new PopupWithForm('.popup_place', submitHandlerPlaceForm);
-      popupWithPlaceForm.setEventListeners();
-
-      function submitHandlerPlaceForm (evt, {placeName: name, placeImageLink: link}) {
-        evt.preventDefault();
-        popupWithPlaceForm.renderLoading();
-        api.addCard({name, link})
-          .then(cardData => {
-            const card = cardsListSection.rendererItem({name: cardData.name, link: cardData.link});
-            cardsListSection.addItem(card.createCard());
-          })
-          .catch(err => console.log(err))
-          .finally(() => {
-            popupWithPlaceForm.close();
-            formValidators.popupFormPlace.disableButton();
-          });
-
-      }
-
-      function openPopupPlace () {
-        formValidators.popupFormPlace.disableButton();
-        formValidators.popupFormPlace.resetErrors();
-        popupWithPlaceForm.open();
-      }
-
-      cardsListSection.renderInitialItems().forEach(card => {
-        cardsListSection.addItem(card.createCard());
-      });
-
-      placeAddButton.addEventListener('click', openPopupPlace);
-
-    })
-    .catch(err => console.log(err));
-
-
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
   infoSelector: '.profile__info'
 });
 
 
-function renderer (item) {
+api.getUserInfo()
+  .then(data => {
+    profileImage.src = data.avatar;
+    userInfo.setUserId(data._id);
+    userInfo.setUserInfo({
+      name: data.name,
+      about: data.about
+    });
+  })
+  .then(() => api.getInitialCards())
+  .then((initialCards) => {
+    return new Section({
+      items: initialCards,
+      renderer
+    }, '.elements__wrapper');
+  })
+  .then(cardsListSection => {
+    const popupWithPlaceForm = new PopupWithForm('.popup_place', submitHandlerPlaceForm);
+    popupWithPlaceForm.setEventListeners();
+
+    function submitHandlerPlaceForm (evt, {placeName: name, placeImageLink: link}) {
+      evt.preventDefault();
+      popupWithPlaceForm.renderLoading();
+      api.addCard({name, link})
+        .then(cardData => {
+          const card = cardsListSection.rendererItem(cardData);
+          cardsListSection.addItem(card.createCard());
+        })
+        .catch(err => console.log(err))
+        .finally(() => {
+          popupWithPlaceForm.close();
+          formValidators.popupFormPlace.disableButton();
+        });
+
+    }
+
+    function openPopupPlace () {
+      formValidators.popupFormPlace.disableButton();
+      formValidators.popupFormPlace.resetErrors();
+      popupWithPlaceForm.open();
+    }
+
+    cardsListSection.renderInitialItems().forEach(card => {
+      cardsListSection.addItem(card.createCard());
+    });
+
+    placeAddButton.addEventListener('click', openPopupPlace);
+
+  })
+  .catch(err => console.log(err));
+
+
+function renderer (cardData) {
   const card = new Card({
-    cardData: item,
-    handleCardClick
+    cardData,
+    userId: userInfo.getUserId(),
+    handleCardClick,
+    handleLikeClick
   }, '.card-template');
   return card;
 }
@@ -116,6 +115,15 @@ function renderer (item) {
 
 function handleCardClick (name, link) {
   popupWithImage.open(name, link);
+}
+
+function handleLikeClick (Card, idCard, isLike) {
+  console.log(Card, idCard, isLike);
+  const cardPromise = isLike ? api.removeLike(idCard) : api.setLike(idCard);
+  cardPromise.then((cardData) => {
+    Card.updateLike(cardData.likes);
+    })
+    .catch(err => console.log(err));
 }
 
 function openPopupProfileImage () {

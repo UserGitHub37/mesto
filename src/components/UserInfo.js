@@ -5,6 +5,16 @@ export default class UserInfo {
   }
 
 
+  getUserId() {
+    return this._userId;
+  }
+
+
+  setUserId(userId) {
+    this._userId = userId;
+  }
+
+
   getUserInfo () {
     return {
       name: this._nameElement.textContent,

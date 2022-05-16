@@ -62,6 +62,34 @@ export default class Api {
   }
 
 
+  setLike(idCard) {
+    return fetch(`${this._baseUrl}cards/${idCard}/likes`, {
+        method: 'PUT',
+        headers: this._headers
+    }).then((res) => {
+        if (res.ok) {
+            return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+  removeLike(idCard) {
+    return fetch(`${this._baseUrl}cards/${idCard}/likes`, {
+        method: 'DELETE',
+        headers: this._headers
+    }).then((res) => {
+        if (res.ok) {
+            return res.json();
+        }
+
+        return Promise.reject(`Ошибка: ${res.status}`);
+    });
+  }
+
+
+
   addCard(data) {
     return fetch(`${this._baseUrl}cards`, {
         method: 'POST',

@@ -14,9 +14,9 @@ export default class Section {
   }
 
   renderInitialItems() {
-    const cards = [];
-    this._initialItems.forEach(item => cards.push(this._renderer(item)));
-    return cards;
+    const items = [];
+    this._initialItems.forEach(item => items.push(this._renderer(item)));
+    return items;
   }
 
 }
