@@ -6,10 +6,3 @@
   object-position: center;
 }
 
-
-@media screen and (max-width: 767px) {
-  .profile__image {
-    grid-column: 2/3;
-    justify-self: center;
-  }
-}

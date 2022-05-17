@@ -4,3 +4,10 @@
   width: 120px;
   height: 120px;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__image-wrapper {
+    grid-column: 2/3;
+    justify-self: center;
+  }
+}

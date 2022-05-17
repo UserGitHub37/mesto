@@ -107,7 +107,8 @@ function renderer (cardData) {
     cardData,
     userId: userInfo.getUserId(),
     handleCardClick,
-    handleLikeClick
+    handleLikeClick,
+    handleDeleteIconClick
   }, '.card-template');
   return card;
 }
@@ -117,19 +118,18 @@ function handleCardClick (name, link) {
   popupWithImage.open(name, link);
 }
 
-function handleLikeClick (Card, idCard, isLike) {
-  console.log(Card, idCard, isLike);
-  const cardPromise = isLike ? api.removeLike(idCard) : api.setLike(idCard);
+
+function handleLikeClick (card, isLike) {
+  const cardPromise = isLike ? api.removeLike(card.cardId) : api.setLike(card.cardId);
   cardPromise.then((cardData) => {
-    Card.updateLike(cardData.likes);
+    card.updateLike(cardData.likes);
     })
     .catch(err => console.log(err));
 }
 
+
 function openPopupProfileImage () {
   formValidators.popupFormProfileImage.disableButton();
-
-
   popupWithProfileImageForm.open();
 }
 
@@ -143,13 +143,24 @@ function openPopupProfile () {
   popupWithProfileForm.open();
 }
 
-/*
-function openPopupDeleteCard () {
-  PopupWithDeleteCard.open();
-}
- */
 
-// openPopupDeleteCard();
+function handleDeleteIconClick (cardData) {
+  PopupWithDeleteCard.open(cardData);
+
+}
+
+
+function submitHandlerDeleteCard (evt, cardData) {
+  evt.preventDefault();
+  api.deleteCard(cardData.cardId)
+  .then(() => {
+    cardData.cardElement.remove();
+    cardData.cardElement = null;
+  })
+  .catch(err => console.log(err))
+  .finally(() => PopupWithDeleteCard.close());
+
+}
 
 
 function submitHandlerProfileImageForm (evt, {profileImageLink}) {
@@ -175,13 +186,6 @@ function submitHandlerProfileForm (evt, {userName: name, aboutUser: about}) {
     .finally(() => {
       popupWithProfileForm.close();
     });
-}
-
-
-function submitHandlerDeleteCard (evt) {
-  evt.preventDefault();
-  //! добавить код
-  console.log("Меня удалили");
 }
 
 
