@@ -42,6 +42,18 @@
       <p class="footer__author">&copy;&nbsp;2022 Mesto Russia</p>
     </footer>
 
+    <div class="popup popup_image-profile">
+      <div class="popup__container">
+        <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" action="#" name="popupFormProfileImage" novalidate>
+          <input class="popup__input popup__input_field_image-profile" id="link-profile-input" type="url" name="profileImageLink" placeholder="Ссылка на фото профиля" required>
+          <span class="popup__error-message link-profile-input-error"></span>
+          <button type="submit" class="popup__submit-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
     <div class="popup popup_profile">
       <div class="popup__container">
         <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
@@ -56,18 +68,6 @@
       </div>
     </div>
 
-    <div class="popup popup_image-profile">
-      <div class="popup__container">
-        <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
-        <h2 class="popup__title">Обновить аватар</h2>
-        <form class="popup__form" action="#" name="popupFormProfileImage" novalidate>
-          <input class="popup__input popup__input_field_image-profile" id="link-profile-input" type="url" name="profileImageLink" placeholder="Ссылка на фото профиля" required>
-          <span class="popup__error-message link-profile-input-error"></span>
-          <button type="submit" class="popup__submit-button">Сохранить</button>
-        </form>
-      </div>
-    </div>
-
     <div class="popup popup_place">
       <div class="popup__container">
         <button type="button" aria-label="Закрыть окно" class="popup__close-button"></button>
@@ -77,7 +77,7 @@
           <span class="popup__error-message name-place-input-error"></span>
           <input class="popup__input popup__input_field_link-place" id="link-place-input" type="url" name="placeImageLink" placeholder="Ссылка на картинку" required>
           <span class="popup__error-message link-place-input-error"></span>
-          <button type="submit" class="popup__submit-button popup__submit-button_disabled" disabled>Создать</button>
+          <button type="submit" class="popup__submit-button">Создать</button>
         </form>
       </div>
     </div>
