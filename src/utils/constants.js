@@ -1,5 +1,4 @@
 const profile = document.querySelector('.profile');
-const profileImage = profile.querySelector('.profile__image');
 const profileImageEditButton = profile.querySelector('.profile__image-edit-button');
 const profileEditButton = profile.querySelector('.profile__edit-button');
 const placeAddButton = profile.querySelector('.profile__add-button');
@@ -10,4 +9,4 @@ const profileNameInput = profileFormElement.querySelector('.popup__input_field_n
 const profileAboutInput = profileFormElement.querySelector('.popup__input_field_about-profile');
 
 
-export { profileImage, profileImageEditButton, profileEditButton, placeAddButton, profileNameInput, profileAboutInput };
+export { profileImageEditButton, profileEditButton, placeAddButton, profileNameInput, profileAboutInput };

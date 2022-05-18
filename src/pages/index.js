@@ -8,7 +8,6 @@ import UserInfo from '../components/UserInfo.js';
 import { validationSettings } from '../utils/validationSettings.js';
 
 import {
-  profileImage,
   profileImageEditButton,
   profileEditButton,
   placeAddButton,
@@ -30,7 +29,8 @@ const api = new Api({
 
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
-  infoSelector: '.profile__info'
+  infoSelector: '.profile__info',
+  avatarSelector: '.profile__image'
 });
 
 const popupWithProfileImageForm = new PopupWithForm('.popup_image-profile', submitHandlerProfileImageForm);
@@ -51,14 +51,15 @@ function openPopupProfileImage () {
 
 function submitHandlerProfileImageForm (evt, {profileImageLink}) {
   evt.preventDefault();
-  popupWithProfileImageForm.renderLoading();
+  popupWithProfileImageForm.renderLoading(true);
   api.changeAvatar({avatar: profileImageLink})
     .then(data => {
-      profileImage.src = data.avatar;
+      userInfo.setUserAvatar(data.avatar);
+      popupWithProfileImageForm.close();
     })
     .catch(err => console.log(err))
     .finally(() => {
-      popupWithProfileImageForm.close();
+      popupWithProfileImageForm.renderLoading(false);
     });
 }
 
@@ -75,12 +76,15 @@ function openPopupProfile () {
 
 function submitHandlerProfileForm (evt, {userName: name, aboutUser: about}) {
   evt.preventDefault();
-  popupWithProfileForm.renderLoading();
+  popupWithProfileForm.renderLoading(true);
   api.changeUserInfo({ name, about })
-    .then(({ name, about }) => userInfo.setUserInfo({ name, about }))
+    .then(({ name, about }) => {
+      userInfo.setUserInfo({ name, about });
+      popupWithProfileForm.close();
+    })
     .catch(err => console.log(err))
     .finally(() => {
-      popupWithProfileForm.close();
+      popupWithProfileForm.renderLoading(false);
     });
 }
 
@@ -108,9 +112,9 @@ function submitHandlerDeleteCard (evt, cardData) {
   .then(() => {
     cardData.cardElement.remove();
     cardData.cardElement = null;
+    popupWithDeleteCard.close();
   })
-  .catch(err => console.log(err))
-  .finally(() => popupWithDeleteCard.close());
+  .catch(err => console.log(err));
 }
 
 
@@ -134,21 +138,21 @@ popupWithImage.setEventListeners();
 popupWithDeleteCard.setEventListeners();
 
 
-api.getUserInfo()
-  .then(data => {
-    profileImage.src = data.avatar;
-    userInfo.setUserId(data._id);
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    userInfo.setUserAvatar(userData.avatar);
+    userInfo.setUserId(userData._id);
     userInfo.setUserInfo({
-      name: data.name,
-      about: data.about
+      name: userData.name,
+      about: userData.about
     });
-  })
-  .then(() => api.getInitialCards())
-  .then((initialCards) => {
+
     return new Section({
       items: initialCards,
       renderer
     }, '.elements__wrapper');
+
   })
   .then(cardsListSection => {
     const popupWithPlaceForm = new PopupWithForm('.popup_place', submitHandlerPlaceForm);
@@ -162,15 +166,16 @@ api.getUserInfo()
 
     function submitHandlerPlaceForm (evt, {placeName: name, placeImageLink: link}) {
       evt.preventDefault();
-      popupWithPlaceForm.renderLoading();
+      popupWithPlaceForm.renderLoading(true);
       api.addCard({name, link})
         .then(cardData => {
           const card = cardsListSection.rendererItem(cardData);
           cardsListSection.addItem(card.createCard());
+          popupWithPlaceForm.close();
         })
         .catch(err => console.log(err))
         .finally(() => {
-          popupWithPlaceForm.close();
+          popupWithPlaceForm.renderLoading(false);
           formValidators.popupFormPlace.disableButton();
         });
 
